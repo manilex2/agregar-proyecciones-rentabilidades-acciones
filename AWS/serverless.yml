@@ -1,0 +1,94 @@
+service: agregar-datos-proy-rent-tickers
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-2
+  environment:
+    DB_HOST: ${env:DB_HOST}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_PORT: ${env:DB_PORT}
+    DB_DATABASE: ${env:DB_DATABASE}
+    SPREADSHEET_ID: ${env:SPREADSHEET_ID}
+    
+functions:
+  agregarRentabilidadesLPAcciones:
+    handler: rentabilidadeslp.handler
+    memorySize: 1024
+    name: agregar-datos-rent-lp-acciones
+    description: LTF17 - Guarda las Rentabilidades a Largo Plazo desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_RENT_LP: ${env:ID_HOJA_RENT_LP}
+      TABLE_ACCIONES_RENT_LP: ${env:TABLE_ACCIONES_RENT_LP}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * SAT *)
+  agregarRentabilidadesMPAcciones:
+    handler: rentabilidadesmp.handler
+    memorySize: 1024
+    name: agregar-datos-rent-mp-acciones
+    description: LTF18 - Guarda las Rentabilidades a Mediano Plazo desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_RENT_MP: ${env:ID_HOJA_RENT_MP}
+      TABLE_ACCIONES_RENT_MP: ${env:TABLE_ACCIONES_RENT_MP}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * TUE-SAT *)
+  agregarProyLPAcciones:
+    handler: index.handler
+    memorySize: 1024
+    name: agregar-proy-lp-acciones
+    description: LTF19 - Guarda las Proyecciones a Largo Plazo desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_PROY: ${env:ID_HOJA_PROY_LP}
+      TABLE_ACCIONES_PROY: ${env:TABLE_ACCIONES_PROY_LP}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * SAT *)
+  agregarProyMPAcciones:
+    handler: index.handler
+    memorySize: 1024
+    name: agregar-proy-mp-acciones
+    description: LTF20 - Guarda las Proyecciones a Mediano Plazo desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_PROY: ${env:ID_HOJA_PROY_MP}
+      TABLE_ACCIONES_PROY: ${env:TABLE_ACCIONES_PROY_MP}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * TUE-SAT *)
+  agregarProyMPNoLinealAcciones:
+    handler: index.handler
+    memorySize: 1024
+    name: agregar-proy-mp-nolineal-acciones
+    description: LTF21 - Guarda las Proyecciones a Mediano Plazo No Lineales desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_PROY: ${env:ID_HOJA_PROY_MP_NOLINEAL}
+      TABLE_ACCIONES_PROY: ${env:TABLE_ACCIONES_PROY_MP_NOLINEAL}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * TUE-SAT *)
+  agregarProyLPNoLinealAcciones:
+    handler: index.handler
+    memorySize: 1024
+    name: agregar-proy-lp-nolineal-acciones
+    description: LTF22 - Guarda las Proyecciones a Largo Plazo No Lineales desde Google Spreadsheet a la base de Datos.
+    timeout: 300
+    maximumRetryAttempts: 0
+    environment:
+      ID_HOJA_PROY: ${env:ID_HOJA_PROY_LP_NOLINEAL}
+      TABLE_ACCIONES_PROY: ${env:TABLE_ACCIONES_PROY_LP_NOLINEAL}
+    events:
+      - eventBridge:
+          schedule: cron(0 3 ? * SAT *)
