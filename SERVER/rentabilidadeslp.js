@@ -43,10 +43,10 @@ app.get('/', async function (solicitud, respuesta) {
             var m3 = recogerRentabilidadesLP[i][4];
             var m6 = recogerRentabilidadesLP[i][5];
             var a1 = recogerRentabilidadesLP[i][6];
-            var a3 = recogerRentabilidadesLP[i][7];
+            /* var a3 = recogerRentabilidadesLP[i][7];
             var a5 = recogerRentabilidadesLP[i][8];
-            var a10 = recogerRentabilidadesLP[i][9];
-            var idGrupo = recogerRentabilidadesLP[i][10];
+            var a10 = recogerRentabilidadesLP[i][9]; */
+            var idGrupo = recogerRentabilidadesLP[i][7];
             let newRentabilidadLP = new RentabilidadLP(
                 secuencial,
                 escenario,
@@ -55,9 +55,9 @@ app.get('/', async function (solicitud, respuesta) {
                 m3,
                 m6,
                 a1,
-                a3,
+                /* a3,
                 a5,
-                a10,
+                a10, */
                 idGrupo
             );
             newRentabilidadLP.push(rentabilidadeslp);
