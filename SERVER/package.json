@@ -6,7 +6,7 @@
     "author": "Manuel Pereira",
     "license": "ISC",
     "scripts": {
-        "dev": "nodemon index.js"
+        "dev": "nodemon rentabilidadesmp.js"
     },
     "dependencies": {
         "dotenv": "^16.0.1",

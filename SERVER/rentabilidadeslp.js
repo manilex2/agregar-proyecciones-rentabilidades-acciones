@@ -70,7 +70,6 @@ app.get('/', async function (solicitud, respuesta) {
     }
 
     async function agregarDatos(datos, table) {
-        console.log(datos);
         if (!datos || datos[0][0]==="#N/A") {
             console.log("No se encontraron datos.");
             return;
