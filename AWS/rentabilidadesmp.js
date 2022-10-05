@@ -25,7 +25,7 @@ exports.handler = async function (event) {
             var requestRentabilidadesMP = (await googleSheet.spreadsheets.values.get({
                 auth,
                 spreadsheetId,
-                range: `${process.env.ID_HOJA_RENT_MP}`
+                range: process.env.ID_HOJA_RENT_MP
             })).data;
             var recogerRentabilidadesMP = requestRentabilidadesMP.values;
     

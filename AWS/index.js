@@ -24,10 +24,10 @@ exports.handler = async function (event) {
             var requestProyecciones = (await googleSheet.spreadsheets.values.get({
                 auth,
                 spreadsheetId,
-                range: `${process.env.ID_HOJA_PROY}`
+                range: process.env.ID_HOJA_PROY
             })).data;
             var recogerProyecciones = requestProyecciones.values;
-
+    
             for (let i = 0; i < recogerProyecciones.length; i++) {
                 var ticker = recogerProyecciones[i][0].toString();
                 var fecha = recogerProyecciones[i][1].toString();
