@@ -5,7 +5,7 @@ const app = express();
 const mysql2 = require('mysql2');
 const Proyeccion = require("./proyeccionModel");
 const { database } = require('./keys');
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const auth = new google.auth.GoogleAuth({
     keyFile: "credentials.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets"
@@ -30,7 +30,7 @@ app.get('/', async function (solicitud, respuesta) {
         var requestProyecciones = (await googleSheet.spreadsheets.values.get({
             auth,
             spreadsheetId,
-            range: `${process.env.ID_HOJA_PROY}`
+            range: process.env.ID_HOJA_PROY
         })).data;
         var recogerProyecciones = requestProyecciones.values;
 
